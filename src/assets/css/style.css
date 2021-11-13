@@ -800,6 +800,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 14px;
   color: #777777;
   margin-left: 95px;
+  margin-bottom: 5px;
 }
 
 /* Recent Sales */
@@ -1089,6 +1090,7 @@ h1, h2, h3, h4, h5, h6 {
 .vaccineTable tr td {
   padding: 3px 10px !important;
   font-size: 12px;
+  vertical-align: middle !important;
 }
 .vaccineTable tr{
   border-bottom: 1px solid #e5e5e5;
@@ -1140,4 +1142,19 @@ h1, h2, h3, h4, h5, h6 {
   color: #c20505;
   font-size: 11px;
   text-transform: capitalize;
+}
+.news-author {
+  text-align: right;
+  font-size: 10px !important;
+  font-style: italic;
+  margin-right: 20px;
+  margin-bottom: 15px !important;
+}
+.font-14 {
+  font-size: 14px;
+  font-weight: 100;
+}
+.font-10 {
+  font-size: 10px;
+  font-weight: 400;
 }

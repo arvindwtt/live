@@ -108,11 +108,9 @@ export default class VaccineFinder extends Component{
         .then(
         	response => {
             	this.setState({ txnId: response.data.txnId })
-            	console.log(response)
             }
         )
 	}
-
 
 	OTP = () => {
 	    axios({
@@ -131,7 +129,7 @@ export default class VaccineFinder extends Component{
         })
         .then(
         	response => {
-            	console.log(response)
+            	
             }
         )
 	}
@@ -149,24 +147,24 @@ export default class VaccineFinder extends Component{
 									{
 			              				this.state.txnId == '' ? (
 											<>
-												<div class="col-12">
-								                	<label for="inputNanme4" class="form-label">Please Enter Mobile Number</label>
+												<div className="col-12">
+								                	<label for="inputNanme4" className="form-label">Please Enter Mobile Number</label>
 								                	<input type="text" className="form-control" placeholder="Enter Mobile Number"  name="mobileNumber" value={this.state.mobileNumber} onChange={e => this.setState({ mobileNumber: e.target.value })} />
 								                </div>
-								                <div class="text-center">
-								                	<button type="submit" class="btn btn-primary" onClick={()=> this.userLogin(this.state.mobileNumber)}>Submit</button>
+								                <div className="text-center">
+								                	<button type="submit" className="btn btn-primary" onClick={()=> this.userLogin(this.state.mobileNumber)}>Submit</button>
 								                </div>
 							               	</>
 							            )
 							            :
 							            (
 							            	<>
-							            		<div class="col-12">
-								                	<label for="inputNanme4" class="form-label">Please Enter OTP</label>
+							            		<div className="col-12">
+								                	<label for="inputNanme4" className="form-label">Please Enter OTP</label>
 								                	<input type="text" className="form-control" placeholder="Enter OTP"  name="otp" value={this.state.otp} onChange={e => this.setState({ otp: e.target.value })} />
 								                </div>
-								                <div class="text-center">
-								                	<button type="submit" class="btn btn-primary" onClick={()=> this.OTP(this.state.otp)}>Submit</button>
+								                <div className="text-center">
+								                	<button type="submit" className="btn btn-primary" onClick={()=> this.OTP(this.state.otp)}>Submit</button>
 								                </div>
 							            	</>
 							            )
@@ -223,15 +221,15 @@ export default class VaccineFinder extends Component{
 
 				 {
 			        this.state.VaccinationData.length != 0  && (
-						<div class="row">
-					        <div class="col-lg-12">
-					        	<div class="card">
-					            	<div class="card-body">
-					              		<h5 class="card-title">Vaccine Center</h5>
+						<div className="row">
+					        <div className="col-lg-12">
+					        	<div className="card">
+					            	<div className="card-body">
+					              		<h5 className="card-title">Vaccine Center</h5>
 							            <p>Add lightweight datatables to your project with using the library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p>
-					              		<div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
-						              		<div class="dataTable-container">
-							              		<table class="table datatable dataTable-table vaccineTable">
+					              		<div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+						              		<div className="dataTable-container">
+							              		<table className="table datatable dataTable-table vaccineTable">
 								                	<tbody>
 									                	{
 										          			this.state.VaccinationData.map((districtsData, index) => (

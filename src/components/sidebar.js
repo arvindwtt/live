@@ -21,9 +21,9 @@ export default class SideBar extends Component{
 	                	<span>Dashboard</span>
 	              	</Link>
 	            </li>
-	            <li class="nav-item">
-			        <Link class="nav-link collapsed" to="/vaccine-finder">
-			        	<i class="bi bi-person"></i>
+	            <li className="nav-item">
+			        <Link className="nav-link collapsed" to="/vaccine-finder">
+			        	<i className="bi bi-person"></i>
 			        	<span>Vaccine Finder</span>
 			        </Link>
 			     </li>

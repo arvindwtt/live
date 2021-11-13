@@ -7,98 +7,97 @@ export const DataContext = React.createContext();
 export class DataProvider extends Component {
 
     state = {
-        products: [],
-        aboutContent: [],
-        blog: [],
-        WishListState: [],
-        isLogin: false,
-        isAdministrator: false,
-        USERNAME: '',
-        USERMAIL: '',
-        USERPICTURE: '',
-        EDITADDRESSSTATE: '',
-        LogOut: true,
-        LOGOUTTOKEN: '',
-        XCSRFTOKEN: '',
-        SESSIONTOKEN: '',
-        USERUID: '',
-        LOADING: false,
-        ADDRESSLOADING: false,
-        ABOUTLOADING: false,
-        AUTHORIZATION: 'Basic cmVzdGFydmluZDpyZXN0YXJ2aW5k',
-        GETUSERADDRESS: [],
-        SELECTEDADDRESSUSEFORORDER: [],
-        ORDERHISTORY: [],
-        TESTIMONIALS: [],
-        SUCCESS: '',
-        ERROR: '',
-        ALERT: '',
-        ADDTOCARTALERT: '',
-        OrderPlaceButtonDisbale: false,
-        OrderId:'',
-        currentTime : '',
-        EstimatedDelivery: '',
-        cart: [],
-        total: 0,
-        originaltotal: 0
+        Year: '',
+        Month: '',
+        Day: '',
+        Hour: '',
+        Min: '',
+        Sec: '',
+        AMPM: '',
+        WorldCovidCaseData: '',
+        News: '',
+        RealTimeWeather: ''
+    }
+
+    componentDidMount(){
+        var moment = require('moment')
+        this.setState({
+            Year: moment().format('YYYY'),
+            Month: moment().format('MM'),
+            Day: moment().format('DD'),
+            Hour: moment().format('hh'),
+            Min: moment().format('mm'),
+            Sec: moment().format('ss'),
+            AMPM: moment().format('A')
+        })
+
+        navigator.geolocation.getCurrentPosition( (position) => {
+            var self = this
+            axios({
+                method: 'GET',
+                url: 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+position.coords.latitude+'&longitude='+position.coords.longitude+'&localityLanguage=en',
+            })
+            .then(
+                response => {
+                    axios({
+                        method: 'GET',
+                        url: 'https://weatherapi-com.p.rapidapi.com/current.json',
+                        params: {q: response.data.localityInfo.administrative[3].name},
+                        headers: {
+                            'x-rapidapi-host': 'weatherapi-com.p.rapidapi.com',
+                            'x-rapidapi-key': '304f2e9db0mshff84ec55187266ep19d059jsn59a263cb54e2'
+                        }
+                    })
+                    .then(
+                        response => {
+                            this.setState({
+                                RealTimeWeather: response.data
+                            })
+                        }
+                    )
+                }
+            )
+
+        });
+
+
+        axios({
+            method: 'GET',
+            url: 'https://corona-virus-world-and-india-data.p.rapidapi.com/api',
+            headers: {
+                'x-rapidapi-host': 'corona-virus-world-and-india-data.p.rapidapi.com',
+                'x-rapidapi-key': '304f2e9db0mshff84ec55187266ep19d059jsn59a263cb54e2'
+            }
+        })
+        .then(
+            response => {
+                this.setState({
+                    WorldCovidCaseData: response.data
+                })
+            }
+        )
+
+        axios({
+            method: 'GET',
+            url: 'https://newsapi.org/v2/top-headlines?country=in&apiKey=da71d399f1e943ce880feb2a9fb8ccf7'
+        })
+        .then(
+            response => {
+                this.setState({
+                    News: response.data.articles
+                })
+            }
+        )
+
     }
 
     render() {
         const {
-            products,
-            WishListState,
-            aboutContent,
-            OrderPlaceButtonDisbale,
-            cart,
-            total,
-            blog,
-            isLogin,
-            originaltotal,
-            XCSRFTOKEN,
-            SESSIONTOKEN,
-            USERUID,
-            LOADING,
-            AUTHORIZATION, 
-            GETUSERADDRESS, 
-            SELECTEDADDRESSUSEFORORDER, 
-            ORDERHISTORY, 
-            TESTIMONIALS, 
-            SUCCESS, 
-            ERROR, 
-            isAdministrator,  
-            EDITADDRESSSTATE,
-            ALERT,
-            USERNAME,
-            USERMAIL,
-            USERPICTURE,
-            ADDRESSLOADING,
-            ABOUTLOADING,
-            ADDTOCARTALERT
+           Year, Month, Day, Hour, Min, Sec, AMPM, WorldCovidCaseData, News, RealTimeWeather
         }
         = this.state;
         const {
-                addCart, 
-                addWishList, 
-                userDelete, 
-                CloseEditAddressPopup, 
-                addNewAddress, 
-                deleteAddress, 
-                selectedSize, 
-                selectedAddressUseForOrder, 
-                reduction, 
-                increase, 
-                userLogIn, 
-                userRegister, 
-                LogOut, 
-                removeProduct, 
-                getTotal, 
-                orignalprice, 
-                passwordChange, 
-                editAddress, 
-                removeWishList, 
-                innerPagescrollTop,
-                OrderPlace,
-                moveToCart
+                
             }
         = this;
         
@@ -106,57 +105,7 @@ export class DataProvider extends Component {
             <DataContext.Provider 
             value={
                 {
-                    products,
-                    OrderPlaceButtonDisbale,
-                    moveToCart,
-                    addNewAddress, 
-                    WishListState, 
-                    addWishList, 
-                    CloseEditAddressPopup, 
-                    removeWishList, 
-                    userDelete, 
-                    blog, 
-                    selectedSize, 
-                    deleteAddress, 
-                    selectedAddressUseForOrder,  
-                    aboutContent, 
-                    addCart, 
-                    cart, 
-                    XCSRFTOKEN, 
-                    SESSIONTOKEN, 
-                    USERUID, 
-                    LOADING, 
-                    AUTHORIZATION, 
-                    GETUSERADDRESS, 
-                    SELECTEDADDRESSUSEFORORDER, 
-                    ORDERHISTORY, 
-                    TESTIMONIALS,
-                    SUCCESS, 
-                    ERROR, 
-                    isAdministrator, 
-                    isLogin, 
-                    userLogIn, 
-                    userRegister, 
-                    LogOut, 
-                    reduction, 
-                    increase,
-                    removeProduct, 
-                    total, 
-                    getTotal, 
-                    originaltotal, 
-                    orignalprice, 
-                    passwordChange, 
-                    editAddress, 
-                    EDITADDRESSSTATE, 
-                    innerPagescrollTop,
-                    ALERT,
-                    OrderPlace,
-                    USERNAME,
-                    USERMAIL,
-                    USERPICTURE,
-                    ADDRESSLOADING,
-                    ABOUTLOADING,
-                    ADDTOCARTALERT
+                   Year, Month, Day, Hour, Min, Sec, AMPM, WorldCovidCaseData, News, RealTimeWeather
                 }
             }>
                 {this.props.children}
